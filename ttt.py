@@ -1,5 +1,4 @@
-import pdb
-pdb.set_trace()
+
 m=[["","",""],["","",""],["","",""]]
 def checkandplace(m,a,b,x):
     if m[a][b]=="x" or m[a][b]=="o":
@@ -17,41 +16,44 @@ def checkwin(m,a,b,x):
         return 3
 def blank(m,a,b,x):
     if m[0][0]=="" or m[0][1]=="" or m[0][2]=="" or m[1][0]==""or m[1][1]=="" or m[1][2]=="" or m[2][0]=="" or m[2][1]==""or m[2][2]=="":
+        return 1
+    else:
         return 0
 while True:
-    printboard(m)
+    
     print("player A turn")
     a=int(input("x="))
     b=int(input("y="))
     w=checkandplace(m,a,b,"x")
     if w==2:
         print("overlap not allowed")
+        continue
+    printboard(m)
     t=checkwin(m,a,b,"x")
     if t==3:
         print("player A wins")
         break
     o=blank(m,a,b,"x")
     if o==0:
-        print("space available")
+        print("draw")
+        break
+    print("player B turn")
+    a=int(input("x="))
+    b=int(input("y="))
+    w=checkandplace(m,a,b,"o")
+    if w==2:
+        print("overlap not allowed")
         continue
     printboard(m)
-    while True:
-        printboard(m)
-        print("player B turn")
-        a=int(input("x="))
-        b=int(input("y="))
-        w=checkandplace(m,a,b,"o")
-        if w==2:
-            print("overlap not allowed")
-        t=checkwin(m,a,b,"o")
-        if t==3:
-            print("player B wins")
-            break
-        o=blank(m,a,b,"o")
-        if o==0:
-            print("space available")
-            continue
-        printboard(m)
+    t=checkwin(m,a,b,"o")
+    if t==3:
+        print("player B wins")
+        break
+    o=blank(m,a,b,"o")
+    if o==0:
+        print("draw")
+        break
+        
        
         
 
